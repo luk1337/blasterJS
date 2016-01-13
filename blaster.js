@@ -63,9 +63,9 @@ var Blaster = (function Blaster(_arg) {
             for (var resourceName in _this.resources) {
                 if (_this.resources.hasOwnProperty(resourceName)) {
                     var resource = _this.resources[resourceName];
-                    
+
                     // property nie zostalo dziedziczone więc luz
-                    cssOutput += resourceName + " {";
+                    cssOutput += resourceName + " { ";
 
                     for (var r in resource) {
                         var currentResource = resource[r];
@@ -160,7 +160,5 @@ var Blaster = (function Blaster(_arg) {
                 console.warn("Blaster","This browser doesn't support resizing event binding")
             }
         }
-
-
     };
 }());
