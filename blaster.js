@@ -1,4 +1,4 @@
-var Blaster = (function Blaster(_arg) {
+var Blaster = (function Blaster() {
     "use strict";
     var _privateVars = {
     };
@@ -18,16 +18,16 @@ var Blaster = (function Blaster(_arg) {
         _this.merge = function(a, b) {
             for (var p in b) {
                 try {
-                    if ( b[p].constructor==Object ) {
+                    if (b[p].constructor == Object) {
                         a[p] = _this.mergeRecursive(a[p], b[p]);
                     } else {
                         a[p] = b[p];
                     }
                 } catch(e) {
-
                     a[p] = b[p];
                 }
             }
+
             return a;
         };
 
@@ -42,7 +42,6 @@ var Blaster = (function Blaster(_arg) {
             _privateVars.styleElement.innerHTML = generateOutput.cssOutput;
             _this.vars = generateOutput.varsOutput;
             generateOutput = null;
-
         };
 
         _this.resizeHandler = function () {
@@ -104,12 +103,8 @@ var Blaster = (function Blaster(_arg) {
                                 } else {
                                     cssOutput += currentResource[1][param][0] + "; ";
                                 }
-
                             }
-
-                        }
-                        else {
-
+                        } else {
                             cssOutput += currentResource[0] + "; ";
                         }
                     }
