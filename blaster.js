@@ -86,15 +86,7 @@ var Blaster = (function Blaster() {
 
                             for (var param in currentResource[1]) {
                                 if (_this.options.resizeParam <= param) {
-                                    if (paramArray[0] != null) {
-                                        if (paramArray[0] >= (_this.options.resizeParam - param)) {
-                                            paramArray[param] =
-                                                [_this.options.resizeParam - param, currentResource[1][param]];
-                                        }
-                                    } else {
-                                        paramArray[param] =
-                                            [_this.options.resizeParam - param, currentResource[1][param]];
-                                    }
+                                    paramArray[param] = [_this.options.resizeParam - param, currentResource[1][param]];
                                 }
 
                                 if (currentResource[1][param][1] != undefined &&
