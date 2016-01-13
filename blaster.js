@@ -1,5 +1,4 @@
 var Blaster = (function Blaster(_arg) {
-
     "use strict";
     var _privateVars = {
     };
@@ -14,7 +13,6 @@ var Blaster = (function Blaster(_arg) {
 
     // Return the constructor
     return function BlasterConstructor(arg) {
-
         var _this = this; // Cache the `this` keyword
 
         _this.merge = function(a, b) {
@@ -62,47 +60,49 @@ var Blaster = (function Blaster(_arg) {
             var varsOutput = "";
             var paramArray = [];
 
-            for (var resource in _this.resources) {
-                if (_this.resources.hasOwnProperty(resource)) {
+            for (var resourceName in _this.resources) {
+                if (_this.resources.hasOwnProperty(resourceName)) {
+                    var resource = _this.resources[resourceName];
+                    
                     // property nie zostalo dziedziczone więc luz
+                    cssOutput += resourceName + " {";
 
-                    cssOutput += resource + " {";
-
-                    for (var r in _this.resources[resource]) {
+                    for (var r in resource) {
+                        var currentResource = resource[r];
                         cssOutput += r + ": ";
 
-                        if (typeof _this.resources[resource][r][1] === 'string') {
-                            cssOutput += _this.resources[resource][r] + "; ";
-                        } else if (_this.resources[resource][r][1] != undefined &&
-                                _this.resources[resource][r][1] != false &&
-                                typeof _this.resources[resource][r][1] !== 'object') {
-                            cssOutput += (_this.resources[resource][r][0] *
-                                    (_this.resources[resource][r][1] * _privateVars.globalRatio)).toFixed(1);
+                        if (typeof currentResource[1] === 'string') {
+                            cssOutput += resource[r] + "; ";
+                        } else if (currentResource[1] != undefined &&
+                                currentResource[1] != false &&
+                                typeof currentResource[1] !== 'object') {
+                            cssOutput += (currentResource[0] *
+                                    (currentResource[1] * _privateVars.globalRatio)).toFixed(1);
 
-                            if (_this.resources[resource][r][2] != undefined) {
-                                cssOutput += _this.resources[resource][r][2];
+                            if (currentResource[2] != undefined) {
+                                cssOutput += currentResource[2];
                             }
 
                             cssOutput += "; ";
 
-                        } else if (typeof _this.resources[resource][r][1] === 'object') {
+                        } else if (typeof currentResource[1] === 'object') {
                             paramArray = [];
 
-                            for (var param in _this.resources[resource][r][1]) {
-
+                            for (var param in currentResource[1]) {
                                 if (_this.options.resizeParam <= param) {
                                     if (paramArray[0] != null) {
                                         if (paramArray[0] >= (_this.options.resizeParam - param)) {
-                                            paramArray[param] =[_this.options.resizeParam - param, _this.resources[resource][r][1][param]];
+                                            paramArray[param] =[_this.options.resizeParam - param, currentResource[1][param]];
                                         }
                                     } else {
-                                        paramArray[param] = [_this.options.resizeParam - param, _this.resources[resource][r][1][param]];
+                                        paramArray[param] = [_this.options.resizeParam - param, currentResource[1][param]];
                                     }
                                 }
-                                if (_this.resources[resource][r][1][param][1] != undefined && typeof _this.resources[resource][r][1][param][0] === "number") {
-                                    cssOutput += (_this.resources[resource][r][1][param][0] * (_this.resources[resource][r][1][param][1] * _privateVars.globalRatio)).toFixed(1) + _this.resources[resource][r][2] + "; ";
+
+                                if (currentResource[1][param][1] != undefined && typeof currentResource[1][param][0] === "number") {
+                                    cssOutput += (currentResource[1][param][0] * (currentResource[1][param][1] * _privateVars.globalRatio)).toFixed(1) + currentResource[2] + "; ";
                                 } else {
-                                    cssOutput += _this.resources[resource][r][1][param][0] + "; ";
+                                    cssOutput += currentResource[1][param][0] + "; ";
                                 }
 
                             }
@@ -110,17 +110,17 @@ var Blaster = (function Blaster(_arg) {
                         }
                         else {
 
-                            cssOutput += _this.resources[resource][r][0] + "; ";
+                            cssOutput += currentResource[0] + "; ";
                         }
                     }
 
                     cssOutput += "} ";
 
                     for (var v in resource.vars) {
-                        if (_this.resources[resource].vars[r][1] != undefined && _this.resources[resource].vars[r][1] != false) {
-                            varsOutput[r][v] = (_this.resources[resource].vars[r][0] * (_this.resources[resource].vars[r][1] * _privateVars.globalRatio)).toFixed(1);
+                        if (resource.vars[r][1] != undefined && resource.vars[r][1] != false) {
+                            varsOutput[r][v] = (resource.vars[r][0] * (resource.vars[r][1] * _privateVars.globalRatio)).toFixed(1);
                         } else {
-                            varsOutput[r][v] = _this.resources[resource].vars[r][0];
+                            varsOutput[r][v] = resource.vars[r][0];
                         }
                     }
 
