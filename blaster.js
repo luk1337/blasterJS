@@ -132,7 +132,7 @@ var Blaster = (function Blaster() {
         _this.resources = arg.resources;
         _this.vars = {};
 
-        if (_this.options.autoStyleElem == true) {
+        if (_this.options.autoStyleElem) {
             _privateVars.styleElement = document.createElement("style");
             _privateVars.styleElement.setAttribute("id", _this.options.styleElemId);
             document.body.appendChild(_privateVars.styleElement);
