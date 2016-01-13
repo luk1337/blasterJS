@@ -51,8 +51,6 @@ var blaster = new Blaster({
             "height": [200, 1, "px"],
             // rule : [value at definedParam, scaling (responsive object), suffix]
             "width": [200, {
-                // resizeVar threshold : value
-                // 300 : "100px",
                 // resizeVar threshold : [value, scaling]
                 600 : [100, 1]
             }, "px"]
