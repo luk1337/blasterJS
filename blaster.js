@@ -144,13 +144,9 @@ var Blaster = (function Blaster() {
 
         if (_this.options.autoResizeAttach) {
             if(window.attachEvent) {
-                window.attachEvent('onresize', function() {
-                    _this.resizeHandler();
-                });
+                window.attachEvent('onresize', _this.resizeHandler);
             } else if(window.addEventListener) {
-                window.addEventListener('resize', function() {
-                    _this.resizeHandler();
-                }, true);
+                window.addEventListener('resize', _this.resizeHandler, true);
             } else {
                 console.warn("Blaster","This browser doesn't support resizing event binding")
             }
